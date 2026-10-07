@@ -1,0 +1,22 @@
+# Sem variáveis de ambiente, roda com H2 em memória (bom para desenvolver).
+# Em produção, defina DATABASE_URL, DATABASE_USER e DATABASE_PASSWORD para usar o PostgreSQL.
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:h2:mem:acai;DB_CLOSE_DELAY=-1}
+    username: ${DATABASE_USER:sa}
+    password: ${DATABASE_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  port: ${PORT:8080}
+
+acai:
+  # Senha do painel do dono. Troque em produção.
+  owner-password: ${OWNER_PASSWORD:acai123}
+  # Endereço do front (Vercel) liberado no CORS. Vários separados por vírgula.
+  frontend-url: ${FRONTEND_URL:http://localhost:5173}
+  # Coloca os dados de exemplo quando o banco está vazio.
+  seed-sample-data: ${SEED_SAMPLE_DATA:true}
